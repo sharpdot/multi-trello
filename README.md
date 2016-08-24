@@ -1,10 +1,8 @@
-# liquid-trello
+# Multi Trello
 
-Ultra basic integration between trello and liquid planner.
+Multi Trello is a basic tool that provides an overview of cards across multiple trello boards where you use consistent column names.
 
-This tool provides an overview of cards across multiple boards where you use consistent column names.
-
-It also allows you to filter on ownership and columns.
+It provides filters for ownership and column names.
 
 ## Setup
 
