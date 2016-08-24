@@ -1,0 +1,147 @@
+<!--
+
+
+███████╗██╗  ██╗ █████╗ ██████╗ ██████╗ ██████╗  ██████╗ ████████╗
+██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔═══██╗╚══██╔══╝
+███████╗███████║███████║██████╔╝██████╔╝██║  ██║██║   ██║   ██║   
+╚════██║██╔══██║██╔══██║██╔══██╗██╔═══╝ ██║  ██║██║   ██║   ██║   
+███████║██║  ██║██║  ██║██║  ██║██║     ██████╔╝╚██████╔╝   ██║   
+╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═════╝  ╚═════╝    ╚═╝   
+                                                                  
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Multi trello - view summary information across multiple trello boards</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="theme.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Multi Trello</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="loggedin" class="active"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Logged in as <span id="fullName"></span></a></li>
+            <li id="disconnect"><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out</a></li>
+            <li id="loggedout"><a href="#" id="connectLink"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Log In</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+      <div class="page-header" style="margin-top:80px;">
+        <h1>My Trello cards</h1>
+        <p>Viewing cards that are: 
+        <select id="listname" name="listname" class="form-control">
+            <option value="To Do">To Do</option>
+            <option value="In Progress" selected="selected">In Progress</option>
+            <option value="To Verify">To Verify</option>
+            <option value="Done">Done</option>
+        </select>
+        </p>
+
+        <p>and belong to:
+        <select id="username" name="username" class="form-control">
+          <!--
+          <option value="0">Everyone</option>
+          -->
+        </select>
+        </p>
+
+        <div id="message">
+        
+        </div>
+      </div>
+      <!-- 
+for templating see this
+http://blog.reybango.com/2010/07/09/not-using-jquery-javascript-templates-youre-really-missing-out/
+       -->
+      
+      <div id="output">
+      </div>
+
+<script id="boardTemplate" type="x-tmpl-mustache">
+  <div class="col-md-6">
+  <div class="panel panel-success" id="board_{{ board.id }}">
+    <div class="panel-heading">
+      <h3 class="panel-title"><a href="{{ board.url }}" target="trello">{{ board.name }}</a></h3>
+    </div>
+    <div class="panel-body">
+      Loading... 
+    </div>
+    <div id="list_{{ listId }}" class="list-group">
+    </div>
+  </div>
+  </div>
+</script>
+
+<script id="itemTemplate" type="x-tmpl-mustache">
+  <div class="list-group-item">
+    <a href="{{ item.url }}" target="trello">{{ item.name }}</a> 
+    </div>
+</script>
+
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+
+    <script src="js/mustache.js"></script>
+
+    <script src="js/multi-trello.js"></script>
+
+
+    <!-- trello client js -->
+    <script src="https://api.trello.com/1/client.js?key=YOUR_TRELLO_API_KEY"></script>
+
+
+  </body>
+</html>
